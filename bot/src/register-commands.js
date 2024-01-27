@@ -7,6 +7,24 @@ const commands = [
     description: '2 otbora',
   },
   {
+    name: 'kzg',
+    description: 'izgoni gerbata',
+    options: [
+      {
+        name: 'gerbi',
+        type: 3,
+        description: 'gerbata',
+        required: false,
+      },
+      {
+        name: 'vc',
+        type: 3,
+        description: 'voice channela',
+        required: false,
+      },
+    ],
+  },
+  {
     name: '5v5',
     description: 'minimum 10 choveka',
     options: [

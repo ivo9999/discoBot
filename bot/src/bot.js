@@ -103,6 +103,41 @@ client.on('interactionCreate', (interaction) => {
       return interaction.reply(out);
     }
   }
+  if (interaction.commandName === 'kzg') {
+    let gerbiId = '';
+    let channelId = '';
+    if (!(interaction.options.get('gerbi')?.value == undefined)) {
+      gerbiId = interaction.options.get('gerbi').value;
+    }
+    if (!(interaction.options.get('vc')?.value == undefined)) {
+      channelId = interaction.options.get('vc').value;
+    }
+    const guildId = '688793001258123308';
+    const guild = client.guilds.cache.get(guildId);
+
+    if (!guild) {
+      console.log('Guild not found.');
+      return;
+    }
+
+    const userId = gerbiId;
+    const member = guild.members.cache.get(userId);
+
+    if (member) {
+      member.voice.setChannel(channelId);
+      return interaction.reply('kur');
+    } else {
+      guild.members
+        .fetch(userId)
+        .then((fetchedMember) => {
+          fetchedMember.voice.setChannel(channelId);
+          return interaction.reply('kur');
+        })
+        .catch((error) => {
+          return interaction.reply('greshka: ' + error);
+        });
+    }
+  }
 });
 
 function shuffleArray(array) {
