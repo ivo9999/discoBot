@@ -25,6 +25,18 @@ const commands = [
     ],
   },
   {
+    name: 'mute',
+    description: 'kur za komunizma',
+    options: [
+      {
+        name: 'jertva',
+        type: 3,
+        description: 'qnkoi koito da go izqde',
+        required: false,
+      },
+    ],
+  },
+  {
     name: '5v5',
     description: 'minimum 10 choveka',
     options: [
