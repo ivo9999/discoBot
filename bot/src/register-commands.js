@@ -32,7 +32,19 @@ const commands = [
         name: 'jertva',
         type: 3,
         description: 'qnkoi koito da go izqde',
-        required: false,
+        required: true,
+      },
+    ],
+  },
+  {
+    name: 'leka',
+    description: 'tiho malko',
+    options: [
+      {
+        name: 'jertva',
+        type: 3,
+        description: 'nqkoi koito da si mulchi malko',
+        required: true,
       },
     ],
   },

@@ -5,6 +5,7 @@ const { handleCustomCommand } = require('./commands/custom');
 const { handleKzgCommand } = require('./commands/kzg');
 const { handleStartVoteCommand } = require('./commands/vote');
 const { handleMuteAction } = require('./commands/mute');
+const { handleTimeoutCommand } = require('./commands/timeout');
 
 const client = new Client({
   intents: [
@@ -15,6 +16,8 @@ const client = new Client({
     IntentsBitField.Flags.GuildMessageReactions,
     IntentsBitField.Flags.GuildPresences,
     IntentsBitField.Flags.GuildVoiceStates,
+    IntentsBitField.Flags.GuildMessageTyping,
+    IntentsBitField.Flags.GuildModeration,
   ],
 });
 
@@ -39,6 +42,9 @@ client.on('interactionCreate', async (interaction) => {
       break;
     case 'kzg':
       await handleKzgCommand(interaction, options, client);
+      break;
+    case 'leka':
+      await handleTimeoutCommand(interaction, options, client);
       break;
     case 'mute':
       resp = await handleStartVoteCommand(interaction, options, EmbedBuilder);
