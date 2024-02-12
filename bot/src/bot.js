@@ -1,5 +1,11 @@
 require('dotenv').config();
-const { Client, IntentsBitField } = require('discord.js');
+const { Client, IntentsBitField, EmbedBuilder, Events } = require('discord.js');
+const { handle5v5Command } = require('./commands/5v5');
+const { handleCustomCommand } = require('./commands/custom');
+const { handleKzgCommand } = require('./commands/kzg');
+const { handleStartVoteCommand } = require('./commands/vote');
+const { handleMuteAction } = require('./commands/mute');
+const { handleTimeoutCommand } = require('./commands/timeout');
 
 const client = new Client({
   intents: [
@@ -7,114 +13,77 @@ const client = new Client({
     IntentsBitField.Flags.GuildMembers,
     IntentsBitField.Flags.GuildMessages,
     IntentsBitField.Flags.MessageContent,
+    IntentsBitField.Flags.GuildMessageReactions,
     IntentsBitField.Flags.GuildPresences,
     IntentsBitField.Flags.GuildVoiceStates,
+    IntentsBitField.Flags.GuildMessageTyping,
+    IntentsBitField.Flags.GuildModeration,
   ],
 });
 
+let voteMessageId = '';
+let jertvaId = '';
+let resp = [];
 client.on('ready', (c) => {
   console.log(`✅ ${c.user.tag} is online.`);
 });
 
-client.on('interactionCreate', (interaction) => {
-  if (!interaction.isChatInputCommand()) return;
-  if (interaction.commandName === '5v5') {
-    if (interaction.member.voice.channel?.name == undefined) {
-      return interaction.reply('mistake');
-    }
+client.on('interactionCreate', async (interaction) => {
+  if (!interaction.isCommand()) return;
+  const commandName = interaction.commandName;
+  const options = interaction.options;
 
-    const vc = interaction.member.voice.channel.name;
-    const chann = interaction.guild.channels.cache.find((c) => c.name === vc);
-
-    if (!chann) {
-      return interaction.reply('mistake');
-    } else {
-      let users = [];
-      users = chann.members.map((user) => user.user.displayName);
-
-      if (!(interaction.options.get('teko')?.value == undefined)) {
-        users = users.filter(
-          (user) => user !== interaction.options.get('teko').value
-        );
-      }
-
-      if (!(interaction.options.get('teko2')?.value == undefined)) {
-        users = users.filter(
-          (user) => user !== interaction.options.get('teko2').value
-        );
-      }
-
-      if (!(interaction.options.get('teko3')?.value == undefined)) {
-        users = users.filter(
-          (user) => user !== interaction.options.get('teko3').value
-        );
-      }
-
-      if (!(interaction.options.get('teko4')?.value == undefined)) {
-        users = users.filter(
-          (user) => user !== interaction.options.get('teko4').value
-        );
-      }
-
-      if (users.length < 10) {
-        return interaction.reply('mnogo malko hora');
-      }
-
-      const roles = ['top', 'jungle', 'mid', 'adc', 'support'];
-
-      shuffleArray(users);
-
-      let out = '';
-
-      for (let i = 0; i < users.length; i += 2) {
-        out += roles[i / 2] + ' ' + users[i] + '  -  ' + users[i + 1] + ' \n';
-      }
-
-      return interaction.reply(out);
-    }
-  }
-  if (interaction.commandName === 'custom') {
-    if (interaction.member.voice.channel?.name == undefined) {
-      return interaction.reply('mistake');
-    }
-
-    const vc = interaction.member.voice.channel.name;
-    const chann = interaction.guild.channels.cache.find((c) => c.name === vc);
-
-    if (!chann) {
-      return interaction.reply('mistake');
-    } else {
-      let users = [];
-
-      users = chann.members.map((user) => user.user.username);
-
-      shuffleArray(users);
-
-      let out = '';
-
-      for (let i = 0; i < users.length; i += 2) {
-        if (users[i + 1] !== undefined) {
-          out += users[i] + '  -  ' + users[i + 1] + ' \n';
-        } else {
-          out += users[i] + ' e teko';
-        }
-      }
-
-      return interaction.reply(out);
-    }
+  switch (commandName) {
+    case '5v5':
+      await handle5v5Command(interaction, options);
+      break;
+    case 'custom':
+      await handleCustomCommand(interaction);
+      break;
+    case 'kzg':
+      await handleKzgCommand(interaction, options, client);
+      break;
+    case 'leka':
+      await handleTimeoutCommand(interaction, options, client);
+      break;
+    case 'mute':
+      resp = await handleStartVoteCommand(interaction, options, EmbedBuilder);
+      voteMessageId = resp[0];
+      jertvaId = resp[1];
+      break;
+    default:
+      break;
   }
 });
 
-function shuffleArray(array) {
-  for (var i = array.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
+client.on(Events.MessageReactionAdd, async (reaction) => {
+  const thresholds = {
+    '✅': 3,
+    '❌': 3,
+  };
 
-    var temp = array[i];
-
-    array[i] = array[j];
-
-    array[j] = temp;
+  if (
+    reaction.message.id !== voteMessageId ||
+    !thresholds[reaction.emoji.name]
+  ) {
+    return;
   }
-}
+
+  const count = reaction.count - 1;
+  if (count !== thresholds[reaction.emoji.name]) {
+    return;
+  }
+
+  gerbiId = jertvaId;
+
+  voteMessageId = '';
+  jertvaId = '';
+
+  if (reaction.emoji.name === '✅') {
+    await handleMuteAction(gerbiId, true, reaction.message.channel, client);
+  } else if (reaction.emoji.name === '❌') {
+    await handleMuteAction(gerbiId, false, reaction.message.channel, client);
+  }
+});
 
 client.login(process.env.TOKEN);

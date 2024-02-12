@@ -7,6 +7,48 @@ const commands = [
     description: '2 otbora',
   },
   {
+    name: 'kzg',
+    description: 'izgoni gerbata',
+    options: [
+      {
+        name: 'gerbi',
+        type: 3,
+        description: 'gerbata',
+        required: false,
+      },
+      {
+        name: 'vc',
+        type: 3,
+        description: 'voice channela',
+        required: false,
+      },
+    ],
+  },
+  {
+    name: 'mute',
+    description: 'kur za komunizma',
+    options: [
+      {
+        name: 'jertva',
+        type: 3,
+        description: 'qnkoi koito da go izqde',
+        required: true,
+      },
+    ],
+  },
+  {
+    name: 'leka',
+    description: 'tiho malko',
+    options: [
+      {
+        name: 'jertva',
+        type: 3,
+        description: 'nqkoi koito da si mulchi malko',
+        required: true,
+      },
+    ],
+  },
+  {
     name: '5v5',
     description: 'minimum 10 choveka',
     options: [
