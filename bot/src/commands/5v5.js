@@ -1,4 +1,4 @@
-async function handle5v5Command(interaction, options) {
+function handle5v5Command(interaction, options) {
   if (!interaction.member.voice.channel?.name) {
     return interaction.reply('mistake');
   }

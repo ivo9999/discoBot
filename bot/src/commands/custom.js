@@ -1,4 +1,4 @@
-async function handleCustomCommand(interaction) {
+function handleCustomCommand(interaction) {
   if (!interaction.member.voice.channel?.name) {
     return interaction.reply('mistake');
   }
