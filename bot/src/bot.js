@@ -21,11 +21,18 @@ const client = new Client({
   ],
 });
 
+const { ActivityType } = require('discord.js');
+
 let voteMessageId = '';
 let jertvaId = '';
 let resp = [];
 client.on('ready', (c) => {
   console.log(`✅ ${c.user.tag} is online.`);
+
+  client.user.setActivity({
+    name: 'qj mi kura',
+    type: ActivityType.Custom,
+  });
 });
 
 client.on('interactionCreate', async (interaction) => {

@@ -38,14 +38,14 @@ async function handleTimeoutCommand(interaction, options, client) {
 
     if (targetUserRolePosition >= requestUserRolePosition) {
       await interaction.reply(
-        'choveka koito iskash da mutenesh e po-vish ot teb'
+        'choveka koito iskash da mutenesh e po-vissh ot teb'
       );
       return;
     }
 
     if (targetUserRolePosition >= botRolePosition) {
       await interaction.reply(
-        'choveka koito iskash da mutenesh e po-vish ot bota'
+        'choveka koito iskash da mutenesh e po-vissh ot bota'
       );
       return;
     }
