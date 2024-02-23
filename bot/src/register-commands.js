@@ -12,7 +12,7 @@ const commands = [
     options: [
       {
         name: 'gerbi',
-        type: 3,
+        type: 6,
         description: 'gerbata',
         required: false,
       },
@@ -30,7 +30,7 @@ const commands = [
     options: [
       {
         name: 'jertva',
-        type: 3,
+        type: 6,
         description: 'qnkoi koito da go izqde',
         required: true,
       },
@@ -42,9 +42,21 @@ const commands = [
     options: [
       {
         name: 'jertva',
-        type: 3,
+        type: 6,
         description: 'nqkoi koito da si mulchi malko',
         required: true,
+      },
+      {
+        name: 'vreme_v_sekundi',
+        type: 4,
+        description: 'ne go jali',
+        required: false,
+      },
+      {
+        name: 'prichina',
+        type: 3,
+        description: 'kakvo e napravil autista',
+        required: false,
       },
     ],
   },
@@ -55,24 +67,24 @@ const commands = [
       {
         name: 'teko',
         description: 'purvi pederas',
-        type: 3,
+        type: 6,
         required: false,
       },
       {
         name: 'teko2',
-        type: 3,
+        type: 6,
         description: 'vtori pederas',
         required: false,
       },
       {
         name: 'teko3',
-        type: 3,
+        type: 6,
         description: 'treti pederas',
         required: false,
       },
       {
         name: 'teko4',
-        type: 3,
+        type: 6,
         description: 'chetvurti pederas',
         required: false,
       },
