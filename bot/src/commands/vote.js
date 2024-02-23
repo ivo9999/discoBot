@@ -15,7 +15,7 @@ async function handleStartVoteCommand(interaction, options, MessageEmbed) {
   });
   await voteMessage.react('✅');
   await voteMessage.react('❌');
-  // Action thresholds
+
   return [voteMessage.id, jertva];
 }
 

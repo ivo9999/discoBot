@@ -10,7 +10,7 @@ async function handleKzgCommand(interaction, options, client) {
     channelId = options.get('vc').value;
   }
 
-  const guildId = '688793001258123308';
+  const guildId = interaction.guild.id;
   const guild = client.guilds.cache.get(guildId);
 
   if (!guild) {

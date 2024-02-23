@@ -1,5 +1,5 @@
-async function handleMuteAction(userId, isMute, channel, client) {
-  const guildId = process.env.GUILD_ID;
+async function handleMuteAction(userId, isMute, channel, client, reaction) {
+  const guildId = reaction.message.guild.id;
   const guild = client.guilds.cache.get(guildId);
 
   if (!guild) {

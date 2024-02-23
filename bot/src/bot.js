@@ -87,9 +87,21 @@ client.on(Events.MessageReactionAdd, async (reaction) => {
   jertvaId = '';
 
   if (reaction.emoji.name === '✅') {
-    await handleMuteAction(gerbiId, true, reaction.message.channel, client);
+    await handleMuteAction(
+      gerbiId,
+      true,
+      reaction.message.channel,
+      client,
+      reaction
+    );
   } else if (reaction.emoji.name === '❌') {
-    await handleMuteAction(gerbiId, false, reaction.message.channel, client);
+    await handleMuteAction(
+      gerbiId,
+      false,
+      reaction.message.channel,
+      client,
+      reaction
+    );
   }
 });
 
