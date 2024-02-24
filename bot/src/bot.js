@@ -25,13 +25,16 @@ const { ActivityType } = require('discord.js');
 const { handleStartMuteVoteCommand } = require('./commands/voteTimeout');
 
 let resp = [];
+
 client.on('ready', (c) => {
   console.log(`✅ ${c.user.tag} is online.`);
 
-  client.user.setActivity({
-    name: 'qj mi kura',
-    type: ActivityType.Custom,
-  });
+  setInterval(() => {
+    client.user.setActivity({
+      name: getRandomElement(names) + ' e ' + getRandomElement(words),
+      type: ActivityType.Custom,
+    });
+  }, 10000);
 });
 
 client.on('interactionCreate', async (interaction) => {
@@ -109,3 +112,35 @@ client.on(Events.MessageReactionAdd, async (reaction) => {
 });
 
 client.login(process.env.TOKEN);
+
+let names = [
+  'niki',
+  'vizo',
+  'ivo',
+  'az',
+  'nikolai',
+  'teodor',
+  'vasil',
+  'kiko',
+  'jelito',
+  'kostura',
+  'ivanm',
+  'stanimir',
+  'gerbata',
+  'kobaka',
+  'chokito',
+];
+let words = [
+  'pederas',
+  'gei',
+  'autist',
+  'maloumen',
+  'kaput',
+  'iznasilen',
+  'slave',
+  'rob',
+];
+function getRandomElement(arr) {
+  const randomIndex = Math.floor(Math.random() * arr.length);
+  return arr[randomIndex];
+}
