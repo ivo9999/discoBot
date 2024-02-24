@@ -22,9 +22,8 @@ const client = new Client({
 });
 
 const { ActivityType } = require('discord.js');
+const { handleStartMuteVoteCommand } = require('./commands/voteTimeout');
 
-let voteMessageId = '';
-let jertvaId = '';
 let resp = [];
 client.on('ready', (c) => {
   console.log(`✅ ${c.user.tag} is online.`);
@@ -51,12 +50,14 @@ client.on('interactionCreate', async (interaction) => {
       await handleKzgCommand(interaction, options, client);
       break;
     case 'leka':
-      await handleTimeoutCommand(interaction, options, client);
+      resp = await handleStartMuteVoteCommand(
+        interaction,
+        options,
+        EmbedBuilder
+      );
       break;
     case 'mute':
       resp = await handleStartVoteCommand(interaction, options, EmbedBuilder);
-      voteMessageId = resp[0];
-      jertvaId = resp[1];
       break;
     default:
       break;
@@ -67,12 +68,11 @@ client.on(Events.MessageReactionAdd, async (reaction) => {
   const thresholds = {
     '✅': 3,
     '❌': 3,
+    '👍🏿': 1,
+    '👎🏿': 3,
   };
 
-  if (
-    reaction.message.id !== voteMessageId ||
-    !thresholds[reaction.emoji.name]
-  ) {
+  if (reaction.message.id !== resp[0] || !thresholds[reaction.emoji.name]) {
     return;
   }
 
@@ -81,10 +81,7 @@ client.on(Events.MessageReactionAdd, async (reaction) => {
     return;
   }
 
-  gerbiId = jertvaId;
-
-  voteMessageId = '';
-  jertvaId = '';
+  gerbiId = resp[1];
 
   if (reaction.emoji.name === '✅') {
     await handleMuteAction(
@@ -102,6 +99,12 @@ client.on(Events.MessageReactionAdd, async (reaction) => {
       client,
       reaction
     );
+  }
+
+  if (reaction.emoji.name === '👍🏿') {
+    await handleTimeoutCommand(reaction, gerbiId, resp[2], resp[3], client);
+  } else if (reaction.emoji.name === '👎🏿') {
+    await reaction.message.reply('shte jivee');
   }
 });
 
