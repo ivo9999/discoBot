@@ -34,7 +34,7 @@ client.on('ready', (c) => {
       name: getRandomElement(names) + ' e ' + getRandomElement(words),
       type: ActivityType.Custom,
     });
-  }, 10000);
+  }, 5000);
 });
 
 client.on('interactionCreate', async (interaction) => {
@@ -71,7 +71,7 @@ client.on(Events.MessageReactionAdd, async (reaction) => {
   const thresholds = {
     '✅': 3,
     '❌': 3,
-    '👍🏿': 1,
+    '👍🏿': 3,
     '👎🏿': 3,
   };
 

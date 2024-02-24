@@ -21,8 +21,12 @@ async function handleKzgCommand(interaction, options, client) {
   const member = guild.members.cache.get(userId);
 
   if (member) {
-    member.voice.setChannel(channelId);
-    return interaction.reply('kur');
+    try {
+      member.voice.setChannel(channelId);
+      return interaction.reply('kur');
+    } catch (error) {
+      return interaction.reply('greshka: ' + error);
+    }
   } else {
     try {
       const fetchedMember = await guild.members.fetch(userId);
