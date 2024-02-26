@@ -91,7 +91,7 @@ const commands = [
     ],
   },
 ];
-console.log(process.env.CLIENT_ID);
+
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 
 (async () => {

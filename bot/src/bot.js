@@ -139,6 +139,8 @@ let words = [
   'iznasilen',
   'slave',
   'rob',
+  'izrod',
+  'ciganin',
 ];
 function getRandomElement(arr) {
   const randomIndex = Math.floor(Math.random() * arr.length);

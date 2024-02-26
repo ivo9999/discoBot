@@ -6,7 +6,7 @@ async function handleStartVoteCommand(interaction, options, MessageEmbed) {
 
   const voteEmbed = new MessageEmbed()
     .setTitle('Vote')
-    .setDescription('da go izqde li ' + jertva)
+    .setDescription('da zamulchi li ' + jertva)
     .setColor('#0099ff');
 
   const voteMessage = await interaction.reply({
