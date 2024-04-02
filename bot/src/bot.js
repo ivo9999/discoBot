@@ -23,6 +23,7 @@ const client = new Client({
 
 const { ActivityType } = require('discord.js');
 const { handleStartMuteVoteCommand } = require('./commands/voteTimeout');
+const { handlerancChamps } = require('./commands/randChamp');
 
 let resp = [];
 
@@ -49,6 +50,9 @@ client.on('interactionCreate', async (interaction) => {
     case 'custom':
       await handleCustomCommand(interaction);
       break;
+    case 'champs':
+      await handlerancChamps(interaction);
+      break
     case 'kzg':
       await handleKzgCommand(interaction, options, client);
       break;
@@ -141,6 +145,7 @@ let words = [
   'rob',
   'izrod',
   'ciganin',
+  'hui'
 ];
 function getRandomElement(arr) {
   const randomIndex = Math.floor(Math.random() * arr.length);

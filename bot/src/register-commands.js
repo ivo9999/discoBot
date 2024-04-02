@@ -7,6 +7,10 @@ const commands = [
     description: '2 otbora',
   },
   {
+    name: 'champs',
+    description: 'geroi za 5v5',
+  },
+  {
     name: 'kzg',
     description: 'izgoni gerbata',
     options: [

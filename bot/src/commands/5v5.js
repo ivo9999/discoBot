@@ -12,14 +12,6 @@ function handle5v5Command(interaction, options) {
     let users = [];
     users = chann.members.map((user) => user.user.id);
 
-    const excludeOptions = ['teko', 'teko2', 'teko3', 'teko4'];
-    for (const option of excludeOptions) {
-      if (!(options.get(option)?.value == undefined)) {
-        users = users.filter((user) => user !== options.get(option).value);
-        users = users.map((el) => el.match(/\d+/)[0]);
-      }
-    }
-
     if (users.length < 10) {
       return interaction.reply('mnogo malko hora');
     }
