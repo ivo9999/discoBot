@@ -1,9 +1,5 @@
 
 function handlerancChamps(interaction) {
-  if (!interaction.member.voice.channel?.name) {
-    return interaction.reply('mistake');
-  }
-
 
   let topLaneChampions = [
     "Aatrox", "Camille", "Darius", "Fiora", "Gangplank",
