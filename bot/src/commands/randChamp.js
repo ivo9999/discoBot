@@ -34,6 +34,7 @@ function handlerancChamps(interaction) {
     "Jhin", "Jinx", "Kai'Sa", "Kalista", "Kog'Maw",
     "Lucian", "Miss Fortune", "Samira", "Sivir", "Tristana",
     "Twitch", "Varus", "Vayne", "Xayah", "Yasuo"
+
   ];
 
   let supportChampions = [
