@@ -52,7 +52,7 @@ client.on('interactionCreate', async (interaction) => {
       break;
     case 'champs':
       await handlerancChamps(interaction);
-      break
+      break;
     case 'kzg':
       await handleKzgCommand(interaction, options, client);
       break;
@@ -145,7 +145,8 @@ let words = [
   'rob',
   'izrod',
   'ciganin',
-  'hui'
+  'hui',
+  'gerbito',
 ];
 function getRandomElement(arr) {
   const randomIndex = Math.floor(Math.random() * arr.length);
