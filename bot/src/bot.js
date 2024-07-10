@@ -135,18 +135,7 @@ let names = [
   'chokito',
 ];
 let words = [
-  'pederas',
-  'gei',
-  'autist',
-  'maloumen',
-  'kaput',
-  'iznasilen',
-  'slave',
-  'rob',
-  'izrod',
-  'ciganin',
-  'hui',
-  'gerbito',
+  'nepriqten'
 ];
 function getRandomElement(arr) {
   const randomIndex = Math.floor(Math.random() * arr.length);
